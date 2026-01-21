@@ -13,9 +13,11 @@ const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
                 
                 <button onClick={()=>{setPanier([
                     ...(selectedPanier || []),
-                        {title:mydata.title,
-                        price:mydata.price}
-                       ])
+                            {   id:mydata.id,
+                                title:mydata.title,
+                                price:mydata.price
+                            }
+                        ])
                      }}>
                      Ajouter
                 </button>
