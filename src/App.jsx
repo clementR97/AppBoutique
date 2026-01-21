@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 
 import Cart from "./componnents/Cart"
 import Category from "./componnents/Category"
+import Panier from "./componnents/Panier"
 
 function App() {
   // 🔑 take the URL of Api in .env 
@@ -10,7 +11,9 @@ function App() {
   
   // useState for filter  categories
   const [selectedCategory,setCategory] = useState ('')
-  
+  // useState for the bag 
+  const [selectedPanier, setPanier] = useState ([])
+
   //function for filter categories
   const categories = [...new Set(
         dataApi.map(cate=>cate.category)
@@ -40,7 +43,9 @@ useEffect(()=>{
 return (
 <div>
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
-  <Cart dataApi ={dataApi} filter={filterArray}/>
+  <Cart dataApi ={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
+  <Panier selectedPanier={selectedPanier}/>
+  {console.log('mon panier contient:',selectedPanier)}
 </div>
 )
 
