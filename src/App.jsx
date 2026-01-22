@@ -13,8 +13,6 @@ function App() {
   const [selectedCategory,setCategory] = useState ('')
   // useState for the bag 
   const [selectedPanier, setPanier] = useState ([])
-//useState for save data of localStorage about bag
-const [selectedStorage,setStorage] = useState([]) 
 
   //function for filter categories
   const categories = [...new Set(
@@ -27,7 +25,7 @@ const [selectedStorage,setStorage] = useState([])
   useEffect (() => {
     if(selectedPanier.length>0){
       localStorage.setItem('Panier',JSON.stringify(selectedPanier))
-      setStorage(selectedPanier)
+      // setPanier(selectedPanier)
     }
   }, [selectedPanier])
 
@@ -35,7 +33,7 @@ const [selectedStorage,setStorage] = useState([])
     const savedPanier = localStorage.getItem('Panier')
     if(savedPanier){
       const parsePanier = JSON.parse(savedPanier)
-      setStorage(parsePanier)
+      // setStorage(parsePanier)
       setPanier(parsePanier)
     }
   },[])
@@ -60,14 +58,14 @@ useEffect(()=>{
 useEffect(()=>{
   {console.log('mon panier contient:',selectedPanier)}
   {console.log('mon panier dans le localStorage contient:',localStorage.getItem('Panier'))}
-  {console.log('mon panier contient avec parse:',selectedStorage)}
+  
 })
 
 return (
 <div>
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
   <Cart dataApi={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
-  <Panier selectedPanier={selectedPanier} selectedStorage={selectedStorage}/>
+  <Panier selectedPanier={selectedPanier}/>
   
 </div>
 )

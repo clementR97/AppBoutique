@@ -1,4 +1,4 @@
-const Panier=({selectedPanier,selectedStorage})=>{
+const Panier=({selectedPanier})=>{
 
     
 return (
@@ -6,7 +6,7 @@ return (
 <div>
     <h3>Panier</h3>
     <ul>
-        {(selectedStorage ? selectedStorage :selectedPanier).map((item)=>(
+        {selectedPanier.map((item)=>(
             <li key={item.id}>
                 {item.title},{item.price}
                 </li>
