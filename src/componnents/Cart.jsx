@@ -12,7 +12,7 @@ const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
                 {mydata.title}
                 
                 <button onClick={()=>{setPanier([
-                    ...(selectedPanier || []),
+                    ...selectedPanier,
                             {   id:mydata.id,
                                 title:mydata.title,
                                 price:mydata.price
