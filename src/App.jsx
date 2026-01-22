@@ -13,6 +13,8 @@ function App() {
   const [selectedCategory,setCategory] = useState ('')
   // useState for the bag 
   const [selectedPanier, setPanier] = useState ([])
+//useState for save data of localStorage about bag
+const [selectedStorage,setStorage] = useState([]) 
 
   //function for filter categories
   const categories = [...new Set(
@@ -21,7 +23,22 @@ function App() {
       //  function for returns filtered articles as an array
   const filterArray = selectedCategory ? dataApi.filter(item => item.category === selectedCategory) : dataApi
       
-  
+  //data in the localStorage for the bag 
+  useEffect (() => {
+    if(selectedPanier.length>0){
+      localStorage.setItem('Panier',JSON.stringify(selectedPanier))
+      setStorage(selectedPanier)
+    }
+  }, [selectedPanier])
+
+ useEffect(()=>{
+    const savedPanier = localStorage.getItem('Panier')
+    if(savedPanier){
+      const parsePanier = JSON.parse(savedPanier)
+      setStorage(parsePanier)
+      setPanier(parsePanier)
+    }
+  },[])
 
 // fonction for the connect my project with API 
   const ConnectApi = () =>{
@@ -34,18 +51,24 @@ function App() {
           .catch(error => console.log(error))
           
   }
-
 useEffect(()=>{
     ConnectApi()
     
   },[])
  
+  // Debug logs (optionnal -remove for product)
+useEffect(()=>{
+  {console.log('mon panier contient:',selectedPanier)}
+  {console.log('mon panier dans le localStorage contient:',localStorage.getItem('Panier'))}
+  {console.log('mon panier contient avec parse:',selectedStorage)}
+})
+
 return (
 <div>
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
-  <Cart dataApi ={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
-  <Panier selectedPanier={selectedPanier}/>
-  {console.log('mon panier contient:',selectedPanier)}
+  <Cart dataApi={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
+  <Panier selectedPanier={selectedPanier} selectedStorage={selectedStorage}/>
+  
 </div>
 )
 

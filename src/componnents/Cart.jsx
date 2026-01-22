@@ -1,11 +1,13 @@
+import { useEffect } from "react"
 
 const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
- 
-
+  // Debug log (optionnel - à retirer en production)
+  useEffect(() => {
+    console.log('donner dans cart', dataApi)
+  }, [dataApi])
 
     return(
         <>
-        {console.log('donner dans cart',dataApi)}
         <ul>
           { (filter ? filter : dataApi).map(mydata =>
             <li key={mydata.id} value={mydata}>
