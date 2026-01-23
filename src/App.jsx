@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 
+import Header from "./componnents/header"
 import Cart from "./componnents/Cart"
 import Category from "./componnents/Category"
 import Panier from "./componnents/Panier"
@@ -72,6 +73,8 @@ useEffect(()=>{
 
 return (
 <div>
+  
+  <Header  />
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
   <Cart dataApi={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
   <Panier selectedPanier={selectedPanier} setPanier={setPanier}/>
