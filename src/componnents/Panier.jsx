@@ -1,5 +1,6 @@
-const Panier=({selectedPanier})=>{
+const Panier=({selectedPanier,setPanier})=>{
 
+    
     
 return (
 <>
@@ -13,6 +14,9 @@ return (
         ))}
         
     </ul>
+    <button onClick={()=>{
+        localStorage.removeItem('Panier'),setPanier([])
+        }}>Vider le panier</button>
 </div>
 </>
 )

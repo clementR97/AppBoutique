@@ -13,6 +13,8 @@ function App() {
   const [selectedCategory,setCategory] = useState ('')
   // useState for the bag 
   const [selectedPanier, setPanier] = useState ([])
+// useState for clean the bag
+const [selectedBagRemove,setBagRemove]=useState(false)
 
   //function for filter categories
   const categories = [...new Set(
@@ -37,6 +39,13 @@ function App() {
       setPanier(parsePanier)
     }
   },[])
+
+  //  useEffect(()=>{
+  //    if(setBagRemove){
+  // //       localStorage.removeItem('Panier')
+  // {console.log('tu as cliquer sur vider')}
+  //    }
+  //  },[selectedPanier])
 
 // fonction for the connect my project with API 
   const ConnectApi = () =>{
@@ -65,7 +74,7 @@ return (
 <div>
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
   <Cart dataApi={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
-  <Panier selectedPanier={selectedPanier}/>
+  <Panier selectedPanier={selectedPanier} setPanier={setPanier}/>
   
 </div>
 )
