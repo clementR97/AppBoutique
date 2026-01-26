@@ -29,6 +29,7 @@ const [selectedBagRemove,setBagRemove]=useState(false)
     if(selectedPanier.length>0){
       localStorage.setItem('Panier',JSON.stringify(selectedPanier))
       // setPanier(selectedPanier)
+      alert ("article ajouter au panier 😁")
     }
   }, [selectedPanier])
 
@@ -74,10 +75,10 @@ useEffect(()=>{
 return (
 <div>
   
-  <Header  />
+  <Header  selectedPanier={selectedPanier} setPanier={setPanier}/>
   <Category categories={categories} filter={selectedCategory} setFilter={setCategory} />
   <Cart dataApi={dataApi} filter={filterArray} setPanier={setPanier} selectedPanier={selectedPanier}/>
-  <Panier selectedPanier={selectedPanier} setPanier={setPanier}/>
+  {/* <Panier selectedPanier={selectedPanier} setPanier={setPanier}/> */}
   
 </div>
 )

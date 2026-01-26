@@ -21,3 +21,14 @@
     align-items: center;
     margin-right: 30px;
 }
+.image-itemBag{
+    width: 30px;
+}
+.container-article{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid;
+    border-radius: 10px;
+    
+}

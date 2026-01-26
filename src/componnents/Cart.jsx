@@ -1,4 +1,5 @@
-import { useEffect,useState,Component } from "react"
+import { useEffect,useState } from "react"
+// import  '../stylesComponnents/Cart-Style.css'
 
 const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
   // Debug log (optionnel - à retirer en production)
@@ -20,13 +21,45 @@ const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
                 <h2>{mydata.title}</h2>
                 <h3>{mydata.price}€</h3>
                 
-                <button onClick={()=>{setPanier([
+                <button onClick={()=>{
+                  
+                  // verify if article existe in the bag
+                  const exitingItem = selectedPanier.find(item=>item.id === mydata.id)
+
+                  if(exitingItem){
+                    // if the article existe quantity+=1
+                    const newPanier = selectedPanier.map(item=>
+                      item.id === mydata.id
+                      ?{...item,quantity:item.quantity+1}
+                      : item
+                    )
+                    setPanier(newPanier)
+                    localStorage.setItem('Panier',JSON.stringify(newPanier))
+                  }
+                  // for article is new quantity:1
+                  else{
+
+                  }
+                  const newPanier = [
                     ...selectedPanier,
                             {   id:mydata.id,
                                 title:mydata.title,
-                                price:mydata.price
+                                price:mydata.price,
+                                image:mydata.image,
+                                quantity:1
                             }
-                        ])
+                            
+                  ]
+                  setPanier(newPanier)
+                  localStorage.setItem('Panier',JSON.stringify(newPanier))
+                  // setPanier([
+                  //   ...selectedPanier,
+                  //           {   id:mydata.id,
+                  //               title:mydata.title,
+                  //               price:mydata.price,
+                  //               image:mydata.image
+                  //           }
+                  //       ])
                      }}  className="border rounded-sm w-full bg-slate-500 text-white hover:bg-white hover:text-black transition">
                      Ajouter
                 </button>
@@ -54,28 +87,29 @@ const Cart=({dataApi,filter,setPanier,selectedPanier})=>{
                               x
                             </button>
                                           {/* partie containe image*/}
-                                          <div className="img-container">
+                                          <div className="img-container flex justify-center items-center">
                                             <img src={productSelect.image} />
                                           </div>
 
                                                   {/* partie containe title,description and price */}
-                                                  <div className="info-container">
-                                                          <h2>{productSelect.title}</h2>
-                                                          <span>{productSelect.description}</span>
+                                                  <article className="info-container text-wrap">
+                                                          <h2 className="uppercase">{productSelect.title}</h2>
+                                                          <p className="indent-8 leading-relaxed "> {productSelect.description} </p>
                                                           <span>{productSelect.price}€</span>
                                                           
                                                           <button onClick={()=>{setPanier([
                                                             ...selectedPanier,
                                                                     {   id:productSelect.id,
                                                                         title:productSelect.title,
-                                                                        price:productSelect.price
+                                                                        price:productSelect.price,
+                                                                        image:productSelect.image
                                                                     }
                                                                 ])
                                                                 setOpen(false)
                                                             }}  className="border rounded-sm w-full bg-slate-500 text-white hover:bg-white hover:text-black transition">
                                                             Ajouter
                                                         </button>
-                                                  </div>
+                                                  </article>
                           </div>
 
             </div>
