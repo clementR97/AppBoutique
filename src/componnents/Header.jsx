@@ -23,7 +23,7 @@ const Header=({selectedPanier,setPanier})=>{
                         {/* partie modal bag */}
                         {open&&(
                             
-                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                            <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50"
                                  onClick={()=> setOpen(false)}>
 
                                         <div className="bg-white rounded-lg p-8 max-w-2xl w-full m-4 relative flex flex-col" 
